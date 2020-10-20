@@ -4,7 +4,10 @@
 <html>
 <head>
 	<title> Authentification</title>
-	<link rel="stylesheet" href="static/css/Login.css">
+	<!--<link rel="stylesheet" href="static/css/Login.css">  -->
+	<style>
+		<%@ include file="static/css/Login.css" %>
+	</style>
 	
 </head>
 <body>
