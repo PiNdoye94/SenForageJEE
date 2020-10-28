@@ -8,6 +8,7 @@ public interface IClient {
 	public Client save(Client c);
 	public List<Client> findAll();
 	public Client findByDesignation(String mc);
+	public Client getClientById(int id);
 	public Client update(Client c);
 	public void delete(Integer id);
 }

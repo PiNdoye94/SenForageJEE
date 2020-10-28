@@ -8,8 +8,7 @@ public interface IVillage {
 	
 	public Village save(Village v);
 	public List<Village> findAll();
-	public Village findByDesignation(String mc);
-	public Village update(Village v);
+	public Village getVillageById(int id);
 	public void delete(Integer id);
 	
 }

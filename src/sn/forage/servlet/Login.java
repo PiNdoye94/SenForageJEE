@@ -1,6 +1,9 @@
 package sn.forage.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,53 +11,49 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import sn.forage.entities.User;
+import sn.forage.dao.IUser;
+import sn.forage.dao.UserImpl;
+
 /**
  * Servlet implementation class Login
  */
-@WebServlet(name="Login", urlPatterns="/")
+@WebServlet("/login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		this.getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
-	}
-
+    public Login() { super(); }
+   
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email = request.getParameter("identifiant");
-		String password = request.getParameter("password");
 		
-		//création et recupération des session
-		HttpSession session = request.getSession(true);
-		// stockage des sessions 
-		session.setAttribute("identifiant", email);
-		session.setAttribute("password", password);
-		//redirection vers la vue
-		
-		if(email.equals("papisndoye218@gmail.com") && password.equals("12345")) {
-			request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
-			//si on est connecté on peut ajouter un attribut isConnected qui prend la valeur true pour se souvenir si on était connecté
-			session.setAttribute("isConnected", true);	
-	    }else{	
-	    	request.getRequestDispatcher("/").forward(request, response);
-	    	//quand on se redonnecte
-	    	session.setAttribute("isConnected", false);
-	    }
-	}
+		  String username = request.getParameter("identifiant"); 
+		  String password = request.getParameter("password");
+		  
+		  IUser userDao = new UserImpl(); 
+		  User user = userDao.checkLogin(username,password); 
+		  String destPage = "Login.jsp";
+		  
+		  if (user != null) { 
+			  
+			  HttpSession session = request.getSession();
+			  session.setAttribute("user", user); 
+			  destPage = "Accueil.jsp"; 
+			  
+		  } else {
+			  
+			  String message = "Identifiant ou Mot de passe Invalide!!";
+			  request.setAttribute("message", message); }
+			  
+			  RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
+			  dispatcher.forward(request, response);	
+			  
+	      }
 }
 
 

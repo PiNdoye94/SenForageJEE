@@ -3,18 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Authentification</title>
-	<!--<link rel="stylesheet" href="static/css/Login.css">  -->
-	<style>
-		<%@ include file="static/css/Login.css" %>
-	</style>
-	
+	<title>Authentification</title>
+	<link href="public/css/Login.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 
 	<div class="container">
 	<!--img src="image/login.png"/-->
-		<form action="Login" method="POST">
+		<form action="<%=request.getContextPath()%>/login" method="POST">
 			<div>
 				<h1>Authentification</h1>
 			</div>
@@ -24,6 +20,7 @@
 			<div class="form-input">
 				<input type="password" name="password" placeholder="Mot de passe"/>
 			</div>
+			${message}<br>
 			<input type="submit" type="submit" name="connexion" value="LOGIN" class="btn-login"/>
 		</form>
 		<div>

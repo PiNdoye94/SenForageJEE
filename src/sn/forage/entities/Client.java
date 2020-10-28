@@ -16,16 +16,16 @@ public class Client implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	@Column(length=50)
+	@Column(name="nom", length=50)
 	private String nom;
-	@Column(length=150)
+	@Column(name="prenom", length=150)
 	private String prenom;
-	@Column(length=15)
+	@Column(name="telephone", length=15)
 	private String telephone;
-	@Column(length=150)
+	@Column(name="adresse", length=150)
 	private String adresse;
 	@ManyToOne
-	@JoinColumn(name="ID_VILLAGE")
+	@JoinColumn(name="village_id")
 	private Village village;
 	
 	

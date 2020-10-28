@@ -5,8 +5,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Gestion Clients</title>
-	<link rel="stylesheet" href="static/css/Styles.css">
+	<link rel="stylesheet" href="public/css/Styles.css">
 	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -17,17 +18,17 @@
 			<div class="vertical_bar">
 				<div class="profile_info">
 					<div class="img_holder">
-						<img src="static/image/lol.png" alt="profile_pic">
+						<img src="public/image/lol.png" alt="profile_pic">
 					</div>
 					<p class="title">Responsable Clientèle</p>
 					<p class="sub_title">papisndoye218@gmail.com</p>
 				</div>
 				<ul class="menu">
-					<li><a href="Accueil">
+					<li><a href="<%=request.getContextPath()%>/accueil">
 						<span class="icon"><i class="fas fa-home"></i></span>
 						<span class="text">Accueil</span>
 					</a></li>
-					<li><a href="NouveauClient">
+					<li><a href="<%=request.getContextPath()%>/nouveauclient">
 						<span class="icon"><i class="fas fa-user"></i></span>
 						<span class="text">Nouveau Client</span>
 					</a></li>
@@ -52,32 +53,28 @@
 			<div class="container">
 				<div class="content">
 					<div class="item">
-						<div class="searchcommpte" style="text-align: center;">
-		                    <input type="search" name="recherche_client" class="btn_search"placeholder="N° Compte"/>
-		                    <input type="button" name="bouton_de_recherche" class="btn_search" value="Rechercher"/>
-		                </div>
-						
-								<table>
-									<tr>
-										<th>ID client</th>
-										<th>Type client</th>
-										<th>Nom</th>
-										<th>Prenom</th>
-										<th>N° Compte</th>
-										<th>Etat Compte</th>
-									</tr>
-										
-										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td><a href="">Supprimer</a></td>
-											
-											<td><a href="">Mise à jour</a></td>
-										</tr>
-								</table>
+						<table class="table">
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">Nom</th>
+								<th scope="col">Prenom</th>
+								<th scope="col">Telephone</th>
+								<th scope="col">Adresse</th>
+								<th scope="col">Village</th>
+							</tr>
+							<c:forEach var="clients" items="${listClient}">
+							<tr>
+								<th scope="row">${clients.id}</th>
+								<td>${clients.nom}</td>
+								<td>${clients.prenom}</td>
+								<td>${clients.telephone}</td>
+								<td>${clients.adresse}</td>
+								<td>${clients.village}</td>
+								<td><a href="edit?id=<c:out value='${client.id}'/>">Edit</a></td>			
+								<td><a href="delete?id=<c:out value='${user.id}'/>">Delete</a></td>
+							</tr>
+							</c:forEach>
+						</table>
 					</div>
 				</div>
 			</div>

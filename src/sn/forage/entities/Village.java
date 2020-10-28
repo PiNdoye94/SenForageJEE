@@ -17,7 +17,7 @@ public class Village implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	@Column(length=150)
+	@Column(name="nom_village", length=150)
 	private String nomVillage;
 	@OneToMany(mappedBy="village", fetch=FetchType.LAZY, targetEntity=Client.class)
 	private Collection<Client> clients;

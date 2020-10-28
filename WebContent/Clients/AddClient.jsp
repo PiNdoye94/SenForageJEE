@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Nouveau Client</title>
-	<link href="static/css/Styles.css" type="text/css" rel="stylesheet">
+	<link href="public/css/Styles.css" type="text/css" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -17,13 +17,13 @@
 			<div class="vertical_bar">
 				<div class="profile_info">
 					<div class="img_holder">
-						<img src="static/image/lol.png" alt="profile_pic">
+						<img src="public/image/lol.png" alt="profile_pic">
 					</div>
 					<p class="title">Responsable Clientèle</p>
 					<p class="sub_title">papisndoye218@gmail.com</p>
 				</div>
 				<ul class="menu">
-					<li><a href="Accueil">
+					<li><a href="<%=request.getContextPath()%>/accueil">
 						<span class="icon"><i class="fas fa-home"></i></span>
 						<span class="text">Accueil</span>
 					</a></li>
@@ -31,7 +31,7 @@
 						<span class="icon"><i class="fas fa-user"></i></span>
 						<span class="text">Nouveau Client</span>
 					</a></li>
-					<li><a href="GestionClient">
+					<li><a href="<%=request.getContextPath()%>/gestionclient">
 						<span class="icon"><i class="fas fa-cog"></i></span>
 						<span class="text">Gestion Clients</span>
 					</a></li>
@@ -53,17 +53,15 @@
 			<div class="container">
 				<div class="content">
 					<div class="item">
-						<form id="formulaire" name="formouverture" action="ClientServlet" method="POST">  
+						<form id="formulaire" name="formouverture" action="<%=request.getContextPath()%>/nouveauclient" method="POST">  
 			                <fieldset class="donneesClient">
 			                	<legend>Informations client</legend>
 			                		<select name="village">
-			                			<option value="" selected>Selectionner un Village</option> 
-										<option value="valeur1">Valeur 1</option>
-										<option value="valeur2">Valeur 2</option>
-										<option value="valeur3">Valeur 3</option> 
-										<option value="valeur4">Valeur 4</option>
-										<option value="valeur5">Valeur 5</option>
+			                		<c:forEach var="village" items="${listClient}">
+			                			<option value="" selected>Selectionner un Village</option>
+										<option value="${village.nomvillage}">Valeur 1</option>
 			                		</select>
+			                		</c:forEach>
 			                        <div>
 			                            <label for="lname">Nom<span id="error_nom"></span> </label>
 			                            <input type="text" id="lname" name="nom" class="input_saisi" value="" />

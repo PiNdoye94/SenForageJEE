@@ -8,43 +8,51 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import sn.forage.dao.ClientIpml;
-import sn.forage.dao.IClient;
+import sn.forage.dao.IGenerique;
 import sn.forage.dao.VillageImpl;
+import sn.forage.entities.Village;
 
 /**
- * Servlet implementation class GestionServlet
+ * Servlet implementation class VillageServlet
  */
-@WebServlet("/gestionclient")
-public class GestionServlet extends HttpServlet {
+@WebServlet("/VillageServlet")
+public class VillageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private IClient clientdao;  
-    /**
+       
+	private IGenerique villagedao;
+	/**
      * @see HttpServlet#HttpServlet()
      */
-    public GestionServlet() {
+    public VillageServlet() {
         super();
     }
     
     @Override
-   	public void init(ServletConfig config) throws ServletException {
-   		clientdao = new ClientIpml();
-   	}
+	public void init(ServletConfig config) throws ServletException {
+    	 villagedao = (IGenerique) new VillageImpl();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("listClient", clientdao.findAll());
-		request.getRequestDispatcher("/Clients/ListClient.jsp").forward(request, response);
+		request.setAttribute("listVillage", villagedao.list());
+		request.getRequestDispatcher("AccueilServlet").forward(request, response);
+		
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String nomvillage = request.getParameter("nvillage").toString();
+		
+		Village v = new Village();
+		v.setNomVillage(nomvillage);
+		villagedao.save(v);
+		//doGet(request,response);
+		
+		request.getRequestDispatcher("nouveauclient").forward(request, response);
 	}
 
 }

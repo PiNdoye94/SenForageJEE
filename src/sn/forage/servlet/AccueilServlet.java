@@ -3,33 +3,45 @@ package sn.forage.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sn.forage.dao.ClientIpml;
+import sn.forage.dao.IGenerique;
+import sn.forage.dao.IVillage;
+import sn.forage.dao.VillageImpl;
+import sn.forage.entities.Village;
+
 /**
  * Servlet implementation class AccueilServlet
  */
-@WebServlet("/AccueilServlet")
+@WebServlet("/accueil")
 public class AccueilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private IVillage villagedao;  
     /**
      * @see HttpServlet#HttpServlet()
      */
     public AccueilServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
+    
+    @Override
+	public void init(ServletConfig config) throws ServletException {
+		villagedao = new VillageImpl();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.getServletContext().getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
-		
+		request.setAttribute("listVillage", villagedao.findAll());
+		request.getRequestDispatcher("Accueil.jsp").forward(request, response);
+		//response.sendRedirect("Accueil.jsp");
 	}
 
 	/**
@@ -37,19 +49,12 @@ public class AccueilServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String nv = request.getParameter("nvillage");
-		request.setAttribute("nomVillage", nv);
-		if (nv.equals("")) {
-			response.setContentType( "text/html" );
-		    PrintWriter out = response.getWriter();
-			out.println("<tr><td>Veuillez remplir le nom du village!!</td></tr>");
-			
-			request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
-		} else {
-			
-			
-			request.getRequestDispatcher("/WEB-INF/Clients/AddClient.jsp").forward(request, response);
-		}
+		String nomvillage = request.getParameter("nvillage");
+		
+		Village v = new Village();
+		v.setNomVillage(nomvillage);
+		villagedao.save(v);
+		doGet(request,response);
 	}
 
 }

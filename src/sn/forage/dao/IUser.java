@@ -1,7 +1,9 @@
 package sn.forage.dao;
 
+import java.util.List;
+import java.sql.*;
 import sn.forage.entities.User;
 
 public interface IUser {
-	public int add(User user);
+	public User checkLogin(String username, String password);
 }
