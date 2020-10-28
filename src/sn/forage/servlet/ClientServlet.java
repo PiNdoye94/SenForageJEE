@@ -57,7 +57,7 @@ public class ClientServlet extends HttpServlet {
 		String telephone = request.getParameter("telephone");
 		
 		Village v = new Village();
-		int id = Integer.parseInt(request.getParameter("village_id").toString());
+		int id = Integer.parseInt(request.getParameter("village").toString());
         v = villagedao.getVillageById(id);
         
         Client c = new Client();

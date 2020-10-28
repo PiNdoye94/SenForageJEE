@@ -70,8 +70,8 @@
 								<td>${clients.telephone}</td>
 								<td>${clients.adresse}</td>
 								<td>${clients.village}</td>
-								<td><a href="edit?id=<c:out value='${client.id}'/>">Edit</a></td>			
-								<td><a href="delete?id=<c:out value='${user.id}'/>">Delete</a></td>
+								<td><a href="edit?id=<c:out value='${clients.id}'/>">Edit</a></td>			
+								<td><a href="delete?id=<c:out value='${clients.id}'/>">Delete</a></td>
 							</tr>
 							</c:forEach>
 						</table>

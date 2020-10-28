@@ -57,11 +57,12 @@
 			                <fieldset class="donneesClient">
 			                	<legend>Informations client</legend>
 			                		<select name="village">
-			                		<c:forEach var="village" items="${listClient}">
-			                			<option value="" selected>Selectionner un Village</option>
-										<option value="${village.nomvillage}">Valeur 1</option>
+			                			<option selected>Selectionner un Village</option>
+			                			<c:forEach var="village" items="${listVillage}">
+										<option value="${village.id}">${village.nomVillage}</option>
+										</c:forEach>
 			                		</select>
-			                		</c:forEach>
+			                		
 			                        <div>
 			                            <label for="lname">Nom<span id="error_nom"></span> </label>
 			                            <input type="text" id="lname" name="nom" class="input_saisi" value="" />
