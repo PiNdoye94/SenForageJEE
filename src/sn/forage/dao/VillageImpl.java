@@ -36,7 +36,14 @@ public class VillageImpl implements IVillage {
 
 	@Override
 	public List<Village> findAll() {
-		return em.createQuery("SELECT v FROM Village v").getResultList();
+		List <Village> villages = null;	
+		villages = em.createQuery("SELECT v FROM Village v ORDER BY").getResultList();
+//    	if (clients != null && clients.size() > 0) {           
+//            return clients;
+//        } else {
+//            return null;
+//        }
+    return villages;
 	}
 
 	@Override

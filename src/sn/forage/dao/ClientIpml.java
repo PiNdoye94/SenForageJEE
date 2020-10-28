@@ -36,17 +36,12 @@ public class ClientIpml implements IClient {
 	@Override
 	public List<Client> findAll() {
 		List <Client> clients = null;	
-        try {
         	clients = em.createQuery("SELECT c FROM Client c ORDER BY").getResultList();
 //        	if (clients != null && clients.size() > 0) {           
 //                return clients;
 //            } else {
 //                return null;
 //            }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return clients;
 	}
 

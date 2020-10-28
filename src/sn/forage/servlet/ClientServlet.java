@@ -42,6 +42,7 @@ public class ClientServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("listVillage", villagedao.findAll());
 		request.getRequestDispatcher("Clients/AddClient.jsp").forward(request, response);
 		//response.sendRedirect("Clients/AddClient.jsp");	
 	}
