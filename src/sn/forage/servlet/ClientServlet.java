@@ -43,6 +43,7 @@ public class ClientServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("listVillage", villagedao.findAll());
+		request.setAttribute("listClient", villagedao.findAll());
 		request.getRequestDispatcher("Clients/AddClient.jsp").forward(request, response);
 		//response.sendRedirect("Clients/AddClient.jsp");	
 	}
@@ -58,7 +59,7 @@ public class ClientServlet extends HttpServlet {
 		String telephone = request.getParameter("telephone");
 		
 		Village v = new Village();
-		int id = Integer.parseInt(request.getParameter("village").toString());
+		int id = Integer.parseInt(request.getParameter("village"));
         v = villagedao.getVillageById(id);
         
         Client c = new Client();
@@ -71,8 +72,8 @@ public class ClientServlet extends HttpServlet {
 
 		clientdao.save(c);
 		
-		request.getRequestDispatcher("gestionclient").forward(request, response);
-		//response.sendRedirect("Clients/ListClient.jsp");
+		//request.getRequestDispatcher("gestionclient").forward(request, response);
+		response.sendRedirect("gestionclient");
 	}
 
 }

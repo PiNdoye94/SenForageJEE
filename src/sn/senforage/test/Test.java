@@ -1,6 +1,7 @@
 package sn.senforage.test;
 
 import sn.forage.dao.ClientIpml;
+import sn.forage.dao.IClient;
 import sn.forage.dao.IGenerique;
 import sn.forage.dao.IUser;
 import sn.forage.dao.UserImpl;
@@ -26,7 +27,7 @@ public class Test {
 		c.setAdresse("Ndar");
 		c.setVillage(null);
 		
-		IGenerique clientdao = new ClientIpml();
+		IClient clientdao = new ClientIpml();
 		System.out.println(clientdao.save(c));
 		
 

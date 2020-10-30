@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,8 +59,8 @@
 			                	<legend>Informations client</legend>
 			                		<select name="village">
 			                			<option selected>Selectionner un Village</option>
-			                			<c:forEach var="village" items="${listVillage}">
-										<option value="${village.id}">${village.nomVillage}</option>
+			                			<c:forEach var="v" items="${listVillage}">
+											<option value="${v.id}">${v.nomVillage}</option>
 										</c:forEach>
 			                		</select>
 			                		

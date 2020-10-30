@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import sn.forage.entities.Client;
+import sn.forage.entities.Village;
 
 public class ClientIpml implements IClient {
 	
@@ -36,7 +37,7 @@ public class ClientIpml implements IClient {
 	@Override
 	public List<Client> findAll() {
 		List <Client> clients = null;	
-        	clients = em.createQuery("SELECT c FROM Client c ORDER BY").getResultList();
+        	clients = em.createQuery("SELECT c FROM Client c").getResultList();
 //        	if (clients != null && clients.size() > 0) {           
 //                return clients;
 //            } else {
@@ -52,20 +53,8 @@ public class ClientIpml implements IClient {
 
 	@Override
 	public Client getClientById(int id) {
-		try {
-            Client c = new Client();
-            c = this.getClientById(id);
-            em.getTransaction().begin();
-            em.find(c.getClass(), id);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-            }
-            e.printStackTrace();
-        }
+		return (Client) em.createQuery("SELECT c FROM Client c WHERE c.id=:id").setParameter("id", id).getSingleResult();
         
-        return Client;
 	}
 
 	@Override

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,25 +56,27 @@
 					<div class="item">
 						<table class="table">
 							<tr>
-								<th scope="col">ID</th>
+<!-- 								<th scope="col">ID</th> -->
 								<th scope="col">Nom</th>
 								<th scope="col">Prenom</th>
 								<th scope="col">Telephone</th>
 								<th scope="col">Adresse</th>
 								<th scope="col">Village</th>
 							</tr>
-							<c:forEach var="clients" items="${listClient}">
 							<tr>
-								<th scope="row">${clients.id}</th>
-								<td>${clients.nom}</td>
-								<td>${clients.prenom}</td>
-								<td>${clients.telephone}</td>
-								<td>${clients.adresse}</td>
-								<td>${clients.village}</td>
-								<td><a href="edit?id=<c:out value='${clients.id}'/>">Edit</a></td>			
-								<td><a href="delete?id=<c:out value='${clients.id}'/>">Delete</a></td>
+								<c:forEach var="c" items="${listClient}">
+									<tr>
+<%-- 										<th scope="row">${c.id}</th> --%>
+										<td>${c.nom}</td>
+										<td>${c.prenom}</td>
+										<td>${c.telephone}</td>
+										<td>${c.adresse}</td>
+										<td>${c.village.nomVillage}</td>
+<%-- 										<td><a href="edit?id=<c:out value='${c.id}'/>">Edit</a></td>			 --%>
+<%-- 										<td><a href="delete?id=<c:out value='${c.id}'/>">Delete</a></td> --%>
+									</tr>
+								</c:forEach>
 							</tr>
-							</c:forEach>
 						</table>
 					</div>
 				</div>
